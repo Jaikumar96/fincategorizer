@@ -1,0 +1,83 @@
+# Compiled class files
+*.class
+*.jar
+*.war
+*.ear
+target/
+
+# Log files
+*.log
+
+# Package Files
+*.nar
+*.zip
+*.tar.gz
+*.rar
+
+# Virtual environment
+venv/
+env/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDE specific files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.DS_Store
+
+# Node modules and build
+node_modules/
+build/
+dist/
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.local
+
+# Docker volumes
+data/
+mysql-data/
+
+# Test files
+test-*.json
+
+# OS generated files
+Thumbs.db
+.DS_Store
+
+# Maven specific
+.mvn/
+mvnw
+mvnw.cmd
+
+# Gradle specific
+.gradle/
+gradle/
+gradlew
+gradlew.bat
+
+# Spring Boot
+.factorypath
+.apt_generated
+.settings/
+.classpath
+.project
+
+# Python
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~

@@ -1,0 +1,313 @@
+version: '3.8'
+
+#############################################################################
+# FinCategorizer - Docker Compose Configuration
+# 
+# Services:
+# - MySQL 8.0 (Database)
+# - Redis 7.2 (Cache & Rate Limiting)
+# - Gateway Service (Spring Cloud Gateway)
+# - Transaction Service (Spring Boot)
+# - ML Inference Service (FastAPI + Python)
+# - Category Service (Spring Boot)
+# - Analytics Service (Spring Boot)
+# - Frontend (React + Nginx)
+# - Nginx (Reverse Proxy)
+#
+# Quick Start: docker-compose up --build
+#############################################################################
+
+networks:
+  fincategorizer-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
+  redis-data:
+
+services:
+  #############################################################################
+  # MySQL Database
+  #############################################################################
+  mysql:
+    image: mysql:8.0
+    container_name: fincategorizer-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: fincategorizer
+      MYSQL_USER: fincategorizer_app
+      MYSQL_PASSWORD: app_password_123
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+    networks:
+      - fincategorizer-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot123"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  #############################################################################
+  # Redis Cache
+  #############################################################################
+  redis:
+    image: redis:7.2-alpine
+    container_name: fincategorizer-redis
+    restart: always
+    command: redis-server --appendonly yes --requirepass ""
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - fincategorizer-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  #############################################################################
+  # ML Inference Service (Python FastAPI)
+  #############################################################################
+  ml-inference-service:
+    build:
+      context: ./backend/ml-inference-service
+      dockerfile: Dockerfile
+    container_name: fincategorizer-ml-service
+    restart: always
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=fincategorizer
+      - MYSQL_USER=fincategorizer_app
+      - MYSQL_PASSWORD=app_password_123
+      - MODEL_PATH=/app/models
+      - WORKERS=4
+    ports:
+      - "8000:8000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - fincategorizer-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    volumes:
+      - ./backend/ml-inference-service/models:/app/models
+
+  #############################################################################
+  # Transaction Service (Spring Boot)
+  #############################################################################
+  transaction-service:
+    build:
+      context: ./backend/transaction-service
+      dockerfile: Dockerfile
+    container_name: fincategorizer-transaction-service
+    restart: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=fincategorizer
+      - MYSQL_USER=fincategorizer_app
+      - MYSQL_PASSWORD=app_password_123
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - ML_SERVICE_HOST=ml-inference-service
+      - ML_SERVICE_PORT=8000
+      - CATEGORY_SERVICE_HOST=category-service
+      - CATEGORY_SERVICE_PORT=8082
+    ports:
+      - "8081:8081"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      ml-inference-service:
+        condition: service_healthy
+    networks:
+      - fincategorizer-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8081/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 180s
+
+  #############################################################################
+  # Category Service (Spring Boot)
+  #############################################################################
+  category-service:
+    build:
+      context: ./backend/category-service
+      dockerfile: Dockerfile
+    container_name: fincategorizer-category-service
+    restart: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=fincategorizer
+      - MYSQL_USER=fincategorizer_app
+      - MYSQL_PASSWORD=app_password_123
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    ports:
+      - "8082:8082"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - fincategorizer-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8082/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 180s
+
+  #############################################################################
+  # Analytics Service (Spring Boot)
+  #############################################################################
+  analytics-service:
+    build:
+      context: ./backend/analytics-service
+      dockerfile: Dockerfile
+    container_name: fincategorizer-analytics-service
+    restart: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=fincategorizer
+      - MYSQL_USER=fincategorizer_app
+      - MYSQL_PASSWORD=app_password_123
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    ports:
+      - "8083:8083"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - fincategorizer-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8083/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 180s
+
+  #############################################################################
+  # API Gateway (Spring Cloud Gateway)
+  #############################################################################
+  gateway-service:
+    build:
+      context: ./backend/gateway-service
+      dockerfile: Dockerfile
+    container_name: fincategorizer-gateway
+    restart: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=fincategorizer
+      - MYSQL_USER=fincategorizer_app
+      - MYSQL_PASSWORD=app_password_123
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - TRANSACTION_SERVICE_HOST=transaction-service
+      - TRANSACTION_SERVICE_PORT=8081
+      - ML_SERVICE_HOST=ml-inference-service
+      - ML_SERVICE_PORT=8000
+      - CATEGORY_SERVICE_HOST=category-service
+      - CATEGORY_SERVICE_PORT=8082
+      - ANALYTICS_SERVICE_HOST=analytics-service
+      - ANALYTICS_SERVICE_PORT=8083
+      - JWT_SECRET=ThisIsAVerySecureSecretKeyForJWTTokenGenerationPleaseChangeInProduction
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID:-your-google-client-id}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET:-your-google-client-secret}
+      - FRONTEND_URL=http://localhost:3000
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      transaction-service:
+        condition: service_healthy
+      category-service:
+        condition: service_healthy
+      analytics-service:
+        condition: service_healthy
+      ml-inference-service:
+        condition: service_healthy
+    networks:
+      - fincategorizer-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 180s
+
+  #############################################################################
+  # Frontend (React)
+  #############################################################################
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - REACT_APP_API_URL=http://localhost:8080
+    container_name: fincategorizer-frontend
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - gateway-service
+    networks:
+      - fincategorizer-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  #############################################################################
+  # Nginx Reverse Proxy (Optional - for production-like setup)
+  #############################################################################
+  nginx:
+    image: nginx:alpine
+    container_name: fincategorizer-nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - gateway-service
+      - frontend
+    networks:
+      - fincategorizer-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

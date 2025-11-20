@@ -1,0 +1,100 @@
+date,merchant,amount,currency
+2025-11-17,Swiggy Order #123456,450.00,INR
+2025-11-17,Zepto - Groceries,850.50,INR
+2025-11-16,Uber Trip,180.00,INR
+2025-11-16,Amazon.in,1299.00,INR
+2025-11-15,BookMyShow - Avengers,500.00,INR
+2025-11-15,Apollo Pharmacy,320.00,INR
+2025-11-14,Electricity Bill - BESCOM,1850.00,INR
+2025-11-13,MakeMyTrip - Hotel Booking,4500.00,INR
+2025-11-12,Coursera Subscription,3999.00,INR
+2025-11-11,Zerodha - SIP,5000.00,INR
+2025-11-10,HDFC Life Insurance,15000.00,INR
+2025-11-09,Netflix Subscription,649.00,INR
+2025-11-08,Indian Oil Petrol,2000.00,INR
+2025-11-07,Gift Card - Amazon,1000.00,INR
+2025-11-06,Misc Payment,250.00,INR
+2025-10-30,Zomato Order,380.00,INR
+2025-10-29,BigBasket,1200.00,INR
+2025-10-28,Ola Cab,220.00,INR
+2025-10-27,Flipkart,2499.00,INR
+2025-10-26,PVR Cinemas,600.00,INR
+2025-10-25,Doctor Consultation,800.00,INR
+2025-10-24,Jio Fiber Bill,999.00,INR
+2025-10-23,Dominos Pizza,599.00,INR
+2025-10-22,DMart,1850.00,INR
+2025-10-21,Uber Eats,420.00,INR
+2025-10-20,Myntra Shopping,1899.00,INR
+2025-10-19,Spotify Premium,119.00,INR
+2025-10-18,Shell Petrol Pump,1800.00,INR
+2025-10-17,Starbucks Coffee,450.00,INR
+2025-10-16,Book Purchase - Amazon,699.00,INR
+2025-10-15,Cult.fit Membership,2499.00,INR
+2025-10-14,KFC Order,550.00,INR
+2025-10-13,Rapido Bike,45.00,INR
+2025-10-12,Nykaa Beauty,1250.00,INR
+2025-10-11,Water Bill,450.00,INR
+2025-10-10,RedBus Ticket,850.00,INR
+2025-10-09,Amazon Prime Video,299.00,INR
+2025-10-08,Pharmacy - MedPlus,380.00,INR
+2025-10-07,Blinkit Groceries,650.00,INR
+2025-10-06,IRCTC Train Ticket,1200.00,INR
+2025-10-05,Donation - NGO,500.00,INR
+2025-10-04,Swiggy Instamart,450.00,INR
+2025-10-03,Google One Storage,130.00,INR
+2025-10-02,Reliance Fresh,980.00,INR
+2025-10-01,PayTM Recharge,399.00,INR
+2025-09-28,Pizza Hut,799.00,INR
+2025-09-25,Uber Auto,90.00,INR
+2025-09-22,Ajio Fashion,1599.00,INR
+2025-09-20,Hotstar Subscription,1499.00,INR
+2025-09-15,BMTC Bus Pass,1000.00,INR
+2025-09-12,Chai Point,180.00,INR
+2025-09-10,Decathlon Sports,2850.00,INR
+2025-09-08,Lenskart Eyewear,3499.00,INR
+2025-09-05,Tanishq Jewellery,45000.00,INR
+2025-09-03,Croma Electronics,12999.00,INR
+2025-09-01,Haldiram's Snacks,450.00,INR
+2025-08-28,Medlife Order,680.00,INR
+2025-08-25,UrbanClap Home Service,1200.00,INR
+2025-08-22,Fresh Menu Delivery,750.00,INR
+2025-08-20,Licious Chicken,890.00,INR
+2025-08-18,Spencer's Retail,1450.00,INR
+2025-08-15,ICICI Lombard Insurance,8500.00,INR
+2025-08-12,Dream11 Contest,100.00,INR
+2025-08-10,Zostel Hostel Booking,1500.00,INR
+2025-08-08,Ather Energy Service,450.00,INR
+2025-08-05,Country Delight Milk,560.00,INR
+2025-08-03,BookMyShow - Movie,350.00,INR
+2025-08-01,Café Coffee Day,280.00,INR
+2025-07-28,Practo Consultation,500.00,INR
+2025-07-25,Dunzo Delivery,85.00,INR
+2025-07-22,PharmEasy Order,920.00,INR
+2025-07-20,FabIndia Clothing,3200.00,INR
+2025-07-18,Westside Fashion,2100.00,INR
+2025-07-15,Zara Store,4500.00,INR
+2025-07-12,H&M Shopping,1850.00,INR
+2025-07-10,Uber XL Ride,520.00,INR
+2025-07-08,Ola Electric Charging,150.00,INR
+2025-07-05,Faasos Order,380.00,INR
+2025-07-03,Box8 Meal,450.00,INR
+2025-07-01,Behrouz Biryani,650.00,INR
+2025-06-28,Subway Sandwich,320.00,INR
+2025-06-25,McDonald's Meal,450.00,INR
+2025-06-22,Burger King,380.00,INR
+2025-06-20,Taco Bell,420.00,INR
+2025-06-18,Tim Hortons Coffee,350.00,INR
+2025-06-15,Blue Tokai Coffee,480.00,INR
+2025-06-12,Third Wave Coffee,390.00,INR
+2025-06-10,Sleepy Owl Coffee,220.00,INR
+2025-06-08,Dineout Payment,1200.00,INR
+2025-06-05,EazyDiner Booking,1500.00,INR
+2025-06-03,Magicpin Cashback,850.00,INR
+2025-06-01,Groupon Deal,999.00,INR
+2025-05-28,NearBuy Voucher,750.00,INR
+2025-05-25,LittleBlackBook Event,1800.00,INR
+2025-05-22,Insider Concert,2500.00,INR
+2025-05-20,PayZapp Payment,680.00,INR
+2025-05-18,Mobikwik Wallet,500.00,INR
+2025-05-15,FreeCharge Recharge,299.00,INR
+2025-05-12,Amazon Pay Balance,1000.00,INR

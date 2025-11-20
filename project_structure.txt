@@ -1,0 +1,191 @@
+Folder PATH listing
+Volume serial number is AAC3-6853
+C:.
+|   .env
+|   API.md
+|   ARCHITECTURE.md
+|   create-structure.bat
+|   DEPLOYMENT.md
+|   docker-compose.yml
+|   generate-all-files.ps1
+|   generate_complete_project.py
+|   PROJECT_STATUS.md
+|   project_structure.txt
+|   QUICKSTART.md
+|   README.md
+|   setup.bat
+|   setup.sh
+|   
++---backend
+|   |   .gitignore
+|   |   
+|   +---analytics-service
+|   |   |   Dockerfile
+|   |   |   pom.xml
+|   |   |   
+|   |   \---src
+|   |       \---main
+|   |           +---java
+|   |           |   \---com
+|   |           |       \---fincategorizer
+|   |           |           \---analytics
+|   |           |               |   AnalyticsServiceApplication.java
+|   |           |               |   
+|   |           |               +---controller
+|   |           |               |       AnalyticsController.java
+|   |           |               |       
+|   |           |               +---dto
+|   |           |               |       AccuracyResponse.java
+|   |           |               |       CategoryDistributionResponse.java
+|   |           |               |       TrendsResponse.java
+|   |           |               |       
+|   |           |               \---service
+|   |           |                       AnalyticsService.java
+|   |           |                       
+|   |           \---resources
+|   |                   application.yml
+|   |                   
+|   +---category-service
+|   |   |   Dockerfile
+|   |   |   pom.xml
+|   |   |   
+|   |   \---src
+|   |       \---main
+|   |           +---java
+|   |           |   \---com
+|   |           |       \---fincategorizer
+|   |           |           \---category
+|   |           |               |   CategoryServiceApplication.java
+|   |           |               |   
+|   |           |               +---controller
+|   |           |               |       CategoryController.java
+|   |           |               |       
+|   |           |               +---dto
+|   |           |               |       CategoryRequest.java
+|   |           |               |       CategoryResponse.java
+|   |           |               |       
+|   |           |               +---entity
+|   |           |               |       Category.java
+|   |           |               |       CategoryType.java
+|   |           |               |       MerchantPattern.java
+|   |           |               |       
+|   |           |               +---repository
+|   |           |               |       CategoryRepository.java
+|   |           |               |       MerchantPatternRepository.java
+|   |           |               |       
+|   |           |               \---service
+|   |           |                       CategoryService.java
+|   |           |                       
+|   |           \---resources
+|   |                   application.yml
+|   |                   
+|   +---gateway-service
+|   |   |   Dockerfile
+|   |   |   pom.xml
+|   |   |   
+|   |   +---src
+|   |   |   \---main
+|   |   |       +---java
+|   |   |       |   \---com
+|   |   |       |       \---fincategorizer
+|   |   |       |           \---gateway
+|   |   |       |               |   GatewayServiceApplication.java
+|   |   |       |               |   
+|   |   |       |               \---config
+|   |   |       |                       SecurityConfig.java
+|   |   |       |                       
+|   |   |       \---resources
+|   |   |               application.yml
+|   |   |               
+|   |   \---target
+|   |       +---classes
+|   |       |       application.yml
+|   |       |       
+|   |       +---generated-sources
+|   |       |   \---annotations
+|   |       +---generated-test-sources
+|   |       |   \---test-annotations
+|   |       \---test-classes
+|   +---ml-inference-service
+|   |       .gitignore
+|   |       Dockerfile
+|   |       main.py
+|   |       requirements.txt
+|   |       
+|   \---transaction-service
+|       |   Dockerfile
+|       |   pom.xml
+|       |   
+|       \---src
+|           \---main
+|               +---java
+|               |   \---com
+|               |       \---fincategorizer
+|               |           \---transaction
+|               |               |   TransactionServiceApplication.java
+|               |               |   
+|               |               +---config
+|               |               |       RedisConfig.java
+|               |               |       WebClientConfig.java
+|               |               |       
+|               |               +---controller
+|               |               |       TransactionController.java
+|               |               |       
+|               |               +---dto
+|               |               |       BatchUploadResponse.java
+|               |               |       MLCategorizationRequest.java
+|               |               |       MLCategorizationResponse.java
+|               |               |       TransactionRequest.java
+|               |               |       TransactionResponse.java
+|               |               |       
+|               |               +---entity
+|               |               |       Category.java
+|               |               |       CategoryType.java
+|               |               |       Transaction.java
+|               |               |       
+|               |               +---exception
+|               |               |       GlobalExceptionHandler.java
+|               |               |       
+|               |               +---repository
+|               |               |       CategoryRepository.java
+|               |               |       TransactionRepository.java
+|               |               |       
+|               |               \---service
+|               |                       CacheService.java
+|               |                       MLInferenceService.java
+|               |                       TransactionService.java
+|               |                       
+|               \---resources
+|                       application.yml
+|                       
++---database
+|       schema.sql
+|       
++---docker
+|       nginx.conf
+|       
++---frontend
+|   |   .gitignore
+|   |   Dockerfile
+|   |   nginx.conf
+|   |   package.json
+|   |   
+|   \---src
+|       |   App.tsx
+|       |   
+|       +---components
+|       |       Navbar.tsx
+|       |       
+|       +---pages
+|       |       Analytics.tsx
+|       |       Categories.tsx
+|       |       Dashboard.tsx
+|       |       Login.tsx
+|       |       TransactionUpload.tsx
+|       |       
+|       \---services
+|               api.ts
+|               
+\---sample-data
+        transactions.csv
+        
