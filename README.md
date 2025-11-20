@@ -399,7 +399,7 @@ Built for GHCI 25 Hackathon by:
 ## 📞 Support
 
 - **Email**: support@fincategorizer.com
-- **Issues**: [GitHub Issues](https://github.com/yourusername/FinCategorizer/issues)
+- **Issues**: [GitHub Issues](https://github.com/Jaikumar96/fincategorizer/issues)
 - **Docs**: [Full Documentation](https://docs.fincategorizer.com)
 
 ## 🙏 Acknowledgments

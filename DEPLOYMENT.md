@@ -130,7 +130,7 @@ python -c "import secrets; print(secrets.token_urlsafe(64))"
 
 1. **Clone Repository**:
 ```bash
-git clone https://github.com/yourusername/FinCategorizer.git
+git clone https://github.com/Jaikumar96/fincategorizer.git
 cd FinCategorizer
 ```
 
