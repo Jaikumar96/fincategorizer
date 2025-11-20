@@ -389,13 +389,6 @@ Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 MIT License - see [LICENSE](LICENSE) file.
 
-## 👥 Team
-
-Built for GHCI 25 Hackathon by:
-- **Your Name** - Full-Stack Development, Architecture
-- **Team Member 2** - ML Engineering, Data Science
-- **Team Member 3** - Frontend Development, UI/UX
-
 ## 📞 Support
 
 - **Email**: support@fincategorizer.com
