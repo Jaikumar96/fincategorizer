@@ -1,4 +1,4 @@
-# FinCategorizer - AI-Powered Transaction Categorization System
+# AI-Powered Transaction System 
 
 [![GHCI 25 Hackathon](https://img.shields.io/badge/GHCI%2025-Hackathon-blue)](https://ghc.anitab.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
